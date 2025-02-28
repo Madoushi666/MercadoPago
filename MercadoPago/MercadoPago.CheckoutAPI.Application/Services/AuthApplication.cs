@@ -1,4 +1,5 @@
-﻿using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
+﻿using Isopoh.Cryptography.Argon2;
+using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
 using MercadoPago.CheckoutAPI.Application.Dtos.Users.Request;
 using MercadoPago.CheckoutAPI.Application.Interfaces;
 using MercadoPago.CheckoutAPI.Application.Settings;
@@ -10,7 +11,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace MercadoPago.CheckoutAPI.Application.Services
@@ -32,7 +32,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
 
             var user = await _usersRepository.GetUserByEmail(bodyRequest.Email);
 
-            if (user is not null && !string.IsNullOrWhiteSpace(bodyRequest.Password) && (EncryptSHA256(bodyRequest.Password) == user.Password))
+            if (user is not null && !string.IsNullOrWhiteSpace(bodyRequest.Password) && Argon2.Verify(user.Password, bodyRequest.Password))
             {
                 response.Data = GenerateToken(user);
                 response.Message = ReplyMessages.TokenGeneratedSuccessfully;
@@ -45,22 +45,6 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             }
 
             return response;
-        }
-
-        private string EncryptSHA256(string text)
-        {
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(text));
-
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++) 
-                { 
-                    sb.Append(bytes[i].ToString("x2"));
-                }
-
-                return sb.ToString();
-            }
         }
 
         private string GenerateToken(User user)

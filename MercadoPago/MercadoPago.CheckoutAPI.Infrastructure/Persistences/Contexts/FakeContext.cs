@@ -40,7 +40,7 @@ namespace MercadoPago.CheckoutAPI.Infrastructure.Persistences.Contexts
                     // ADMIN
                     UserId = 1,
                     UserName = "Admin",
-                    Password = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", // 1234
+                    Password = "$argon2id$v=19$m=65536,t=3,p=1$wJzWQr1EhYRpANrf4CN46g$r769BfweDJBt6GW/l2/9+Tf+glooEXl4WWAf18u+1C8", // 1234
                     Email = "test@admin.com.ar",
                     Role = _roles.FirstOrDefault(r => r.RoleId == 1)
                 },
@@ -49,7 +49,7 @@ namespace MercadoPago.CheckoutAPI.Infrastructure.Persistences.Contexts
                     // CUSTOMER
                     UserId = 2,
                     UserName = "Customer",
-                    Password = "fe2592b42a727e977f055947385b709cc82b16b9a87f88c6abf3900d65d0cdc3", // 4321
+                    Password = "$argon2id$v=19$m=65536,t=3,p=1$dx/JCx8reoHCnDyv7N30dg$qK//vGto1eBnUUmjwoVOKmVNxNO2rHwIRvIun4eWAxc", // 4321
                     Email = "test@customer.com.ar",
                     Role = _roles.FirstOrDefault(r => r.RoleId == 3)
                 }
