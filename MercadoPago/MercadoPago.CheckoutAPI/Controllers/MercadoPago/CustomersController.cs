@@ -21,7 +21,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpGet("Search")]
         public async Task<IActionResult> SearchCustomers([FromQuery] CustomersRequestFilters filters)
         {
-            var response = await _customersApplication.SearchCustomers(filters);
+            var response = await _customersApplication.SearchCustomersAsync(filters);
 
             return StatusCode(response.StatusCode, response);
         }
@@ -30,7 +30,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpGet("{customerId}")]
         public async Task<IActionResult> GetCustomerById(string customerId)
         {
-            var response = await _customersApplication.GetCustomerById(customerId);
+            var response = await _customersApplication.GetCustomerByIdAsync(customerId);
 
             return StatusCode(response.StatusCode, response);
         }
@@ -38,7 +38,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpPost]
         public async Task<IActionResult> CreateCustomer([FromBody] CustomerRequest bodyRequest)
         {
-            var response = await _customersApplication.CreateCustomer(bodyRequest);
+            var response = await _customersApplication.CreateCustomerAsync(bodyRequest);
 
             return StatusCode(response.StatusCode, response);
         }
@@ -46,7 +46,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpPut("{customerId}")]
         public async Task<IActionResult> UpdateCustomer(string customerId, [FromBody] CustomerRequest bodyRequest)
         {
-            var response = await _customersApplication.UpdateCustomer(customerId, bodyRequest);
+            var response = await _customersApplication.UpdateCustomerAsync(customerId, bodyRequest);
 
             return StatusCode(response.StatusCode, response);
         }

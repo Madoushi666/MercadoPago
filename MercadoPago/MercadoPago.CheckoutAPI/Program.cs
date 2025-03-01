@@ -25,7 +25,7 @@ builder.Services.AddHttpClient("MercadoPagoHttpClient", client =>
     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 });
 
-builder.Services.AddInjectionInfrastructure();
+builder.Services.AddInjectionInfrastructure(configuration);
 builder.Services.AddInjectionApplication();
 builder.Services.AddAuthentication(configuration);
 builder.Services.AddSingleton<IAuthorizationMiddlewareResultHandler, CustomAuthorizationHandler>();

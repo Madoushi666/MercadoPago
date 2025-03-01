@@ -88,7 +88,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
             return httpResponseMessage;
         }
 
-        public async Task<BaseResponse<T>> SetBaseResponse<T>(HttpResponseMessage httpResponse)
+        public async Task<BaseResponse<T>> SetBaseResponseAsync<T>(HttpResponseMessage httpResponse)
         {
             var response = new BaseResponse<T>();
 

@@ -21,7 +21,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpPost]
         public async Task<IActionResult> CreateCardToken([FromBody] CardTokenRequest bodyRequest)
         {
-            var response = await _cardTokensApplication.CreateCardToken(bodyRequest);
+            var response = await _cardTokensApplication.CreateCardTokenAsync(bodyRequest);
 
             return StatusCode(response.StatusCode, response);
         }

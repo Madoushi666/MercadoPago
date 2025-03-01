@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace MercadoPago.CheckoutAPI.Infrastructure.Persistences.Interfaces
 {
-    public interface IUsersRepository
+    public interface IUsuarioRepository : IGenericRepository<Usuario>
     {
-        Task<User> GetUserByEmail(string email);
+        Task<Usuario> GetUserByEmailAsync(string email);
     }
 }

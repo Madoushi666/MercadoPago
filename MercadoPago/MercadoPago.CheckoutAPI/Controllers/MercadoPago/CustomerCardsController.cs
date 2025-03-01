@@ -20,7 +20,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpGet("{customerId}/cards")]
         public async Task<IActionResult> GetCustomerCards(string customerId)
         {
-            var response = await _customerCardsApplication.GetCustomerCards(customerId);
+            var response = await _customerCardsApplication.GetCustomerCardsAsync(customerId);
 
             return StatusCode(response.StatusCode, response);
         }
@@ -28,7 +28,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpGet("{customerId}/cards/{cardId}")]
         public async Task<IActionResult> GetCustomerCardById(string customerId, string cardId)
         {
-            var response = await _customerCardsApplication.GetCustomerCardById(customerId, cardId);
+            var response = await _customerCardsApplication.GetCustomerCardByIdAsync(customerId, cardId);
 
             return StatusCode(response.StatusCode, response);
         }
@@ -36,7 +36,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpPost("{customerId}/cards")]
         public async Task<IActionResult> CreateCustomerCard(string customerId, [FromBody] CustomerCardRequest bodyRequest)
         {
-            var response = await _customerCardsApplication.CreateCustomerCard(customerId, bodyRequest);
+            var response = await _customerCardsApplication.CreateCustomerCardAsync(customerId, bodyRequest);
 
             return StatusCode(response.StatusCode, response);
         }
@@ -44,7 +44,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpPut("{customerId}/cards/{cardId}")]
         public async Task<IActionResult> UpdateCustomerCard(string customerId, string cardId, [FromBody] CustomerCardRequest bodyRequest)
         {
-            var response = await _customerCardsApplication.UpdateCustomerCard(customerId, cardId, bodyRequest);
+            var response = await _customerCardsApplication.UpdateCustomerCardAsync(customerId, cardId, bodyRequest);
 
             return StatusCode(response.StatusCode, response);
         }
@@ -52,7 +52,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpDelete("{customerId}/cards/{cardId}")]
         public async Task<IActionResult> DeleteCustomerCard(string customerId, string cardId)
         {
-            var response = await _customerCardsApplication.DeleteCustomerCard(customerId, cardId);
+            var response = await _customerCardsApplication.DeleteCustomerCardAsync(customerId, cardId);
 
             return StatusCode(response.StatusCode, response);
         }

@@ -20,7 +20,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpGet("Me")]
         public async Task<IActionResult> GetMyUser()
         {
-            var response = await _usersApplication.GetMyUser();
+            var response = await _usersApplication.GetMyUserAsync();
 
             return StatusCode(response.StatusCode, response);
         }
@@ -29,7 +29,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpPost("Test")]
         public async Task<IActionResult> CreateTestUser([FromBody] CreateTestUserRequest bodyRequest)
         {
-            var response = await _usersApplication.CreateTestUser(bodyRequest);
+            var response = await _usersApplication.CreateTestUserAsync(bodyRequest);
 
             return StatusCode(response.StatusCode, response);
         }

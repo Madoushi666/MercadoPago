@@ -7,6 +7,7 @@ using MercadoPago.CheckoutAPI.Domain.Entities;
 using MercadoPago.CheckoutAPI.Infrastructure.Persistences.Interfaces;
 using MercadoPago.CheckoutAPI.Utilities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -17,12 +18,12 @@ namespace MercadoPago.CheckoutAPI.Application.Services
 {
     public class AuthApplication : IAuthApplication
     {
-        private readonly IUsersRepository _usersRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IOptions<JwtSettings> _jwtSettings;
 
-        public AuthApplication(IUsersRepository usersRepository, IOptions<JwtSettings> jwtSettings)
+        public AuthApplication(IUnitOfWork unitOfWork, IOptions<JwtSettings> jwtSettings)
         {
-            _usersRepository = usersRepository;
+            _unitOfWork = unitOfWork;
             _jwtSettings = jwtSettings;
         }
 
@@ -30,7 +31,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
         {
             var response = new BaseResponse<string>();
 
-            var user = await _usersRepository.GetUserByEmail(bodyRequest.Email);
+            var user = await _unitOfWork.Usuario.GetUserByEmailAsync(bodyRequest.Email);
 
             if (user is not null && !string.IsNullOrWhiteSpace(bodyRequest.Password) && Argon2.Verify(user.Password, bodyRequest.Password))
             {
@@ -47,7 +48,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        private string GenerateToken(User user)
+        private string GenerateToken(Usuario user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Value.SecretKey));
 
@@ -55,9 +56,9 @@ namespace MercadoPago.CheckoutAPI.Application.Services
 
             var userClaims = new Claim[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role.Description)
+                new Claim(ClaimTypes.Role, user.IdRolNavigation.Descripcion)
             };
 
             var handler = new JwtSecurityTokenHandler();

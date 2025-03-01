@@ -17,42 +17,42 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
             _serializer = serializer;
         }
 
-        public async Task<BaseResponse<object>> SearchPayments(PaymentsRequestFilters filters)
+        public async Task<BaseResponse<object>> SearchPaymentsAsync(PaymentsRequestFilters filters)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"payments/search{_serializer.SetQueryParams(filters)}");
             var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SetBaseResponse<object>(httpResponse);
+            var response = await _httpClientManagerApplication.SetBaseResponseAsync<object>(httpResponse);
             return response;
         }
 
-        public async Task<BaseResponse<object>> GetPaymentById(int paymentId)
+        public async Task<BaseResponse<object>> GetPaymentByIdAsync(int paymentId)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"payments/{paymentId}");
             var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SetBaseResponse<object>(httpResponse);
+            var response = await _httpClientManagerApplication.SetBaseResponseAsync<object>(httpResponse);
             return response;
         }
 
-        public async Task<BaseResponse<object>> CreatePayment(PaymentRequest bodyRequest)
+        public async Task<BaseResponse<object>> CreatePaymentAsync(PaymentRequest bodyRequest)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, $"payments");
             _httpClientManagerApplication.AddXIdempotencyKey(httpRequest.Headers);
             _serializer.AddJsonBodyToContent(httpRequest, bodyRequest);
             var httpResponse = await _httpClientManagerApplication.SendWithRetryAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SetBaseResponse<object>(httpResponse);
+            var response = await _httpClientManagerApplication.SetBaseResponseAsync<object>(httpResponse);
             return response;
         }
 
-        public async Task<BaseResponse<object>> UpdatePayment(int paymentId, PaymentRequest bodyRequest)
+        public async Task<BaseResponse<object>> UpdatePaymentAsync(int paymentId, PaymentRequest bodyRequest)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Put, $"payments/{paymentId}");
             _serializer.AddJsonBodyToContent(httpRequest, bodyRequest);
             var httpResponse = await _httpClientManagerApplication.SendWithRetryAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SetBaseResponse<object>(httpResponse);
+            var response = await _httpClientManagerApplication.SetBaseResponseAsync<object>(httpResponse);
             return response;
         }
     }

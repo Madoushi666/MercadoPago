@@ -18,41 +18,41 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
             _serializer = serializer;
         }
 
-        public async Task<BaseResponse<object>> SearchCustomers(CustomersRequestFilters filters)
+        public async Task<BaseResponse<object>> SearchCustomersAsync(CustomersRequestFilters filters)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"customers/search{_serializer.SetQueryParams(filters)}");
             var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SetBaseResponse<object>(httpResponse);
+            var response = await _httpClientManagerApplication.SetBaseResponseAsync<object>(httpResponse);
             return response;
         }
 
-        public async Task<BaseResponse<object>> GetCustomerById(string customerId)
+        public async Task<BaseResponse<object>> GetCustomerByIdAsync(string customerId)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"customers/{customerId}");
             var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SetBaseResponse<object>(httpResponse);
+            var response = await _httpClientManagerApplication.SetBaseResponseAsync<object>(httpResponse);
             return response;
         }
 
-        public async Task<BaseResponse<object>> CreateCustomer(CustomerRequest bodyRequest)
+        public async Task<BaseResponse<object>> CreateCustomerAsync(CustomerRequest bodyRequest)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, $"customers");
             _serializer.AddJsonBodyToContent(httpRequest, bodyRequest);
             var httpResponse = await _httpClientManagerApplication.SendWithRetryAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SetBaseResponse<object>(httpResponse);
+            var response = await _httpClientManagerApplication.SetBaseResponseAsync<object>(httpResponse);
             return response;
         }
 
-        public async Task<BaseResponse<object>> UpdateCustomer(string customerId, CustomerRequest bodyRequest)
+        public async Task<BaseResponse<object>> UpdateCustomerAsync(string customerId, CustomerRequest bodyRequest)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Put, $"customers/{customerId}");
             _serializer.AddJsonBodyToContent(httpRequest, bodyRequest);
             var httpResponse = await _httpClientManagerApplication.SendWithRetryAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SetBaseResponse<object>(httpResponse);
+            var response = await _httpClientManagerApplication.SetBaseResponseAsync<object>(httpResponse);
             return response;
         }
 

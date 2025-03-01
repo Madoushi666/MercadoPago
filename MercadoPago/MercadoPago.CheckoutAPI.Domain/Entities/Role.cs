@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MercadoPago.CheckoutAPI.Domain.Entities;
 
-namespace MercadoPago.CheckoutAPI.Domain.Entities
+public partial class Role : BaseEntity
 {
-    public class Role
-    {
-        public int RoleId { get; set; }
-        public string Description { get; set; }
-    }
+    public string Descripcion { get; set; } = null!;
+
+    public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
 }
