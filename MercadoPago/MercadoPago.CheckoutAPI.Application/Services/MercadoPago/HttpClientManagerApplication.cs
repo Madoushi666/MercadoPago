@@ -1,5 +1,5 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
-using MercadoPago.CheckoutAPI.Application.Interfaces;
+using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
 using MercadoPago.CheckoutAPI.Application.Serialization;
 using MercadoPago.CheckoutAPI.Application.Settings;
 using MercadoPago.CheckoutAPI.Utilities;

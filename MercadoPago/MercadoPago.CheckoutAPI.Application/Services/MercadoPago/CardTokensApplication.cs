@@ -1,5 +1,4 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
-using MercadoPago.CheckoutAPI.Application.Interfaces;
 using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
 using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.CardToken.Request;
 using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.CardToken.Response;

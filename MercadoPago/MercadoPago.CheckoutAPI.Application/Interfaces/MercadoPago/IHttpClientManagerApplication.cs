@@ -1,7 +1,7 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
 using System.Net.Http.Headers;
 
-namespace MercadoPago.CheckoutAPI.Application.Interfaces
+namespace MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago
 {
     public interface IHttpClientManagerApplication
     {

@@ -15,7 +15,11 @@ namespace MercadoPago.CheckoutAPI.Infrastructure.Extensions
             services.AddDbContext<StoreDbContext>(options =>
             {
                 options.UseSqlServer(
-                    configuration.GetConnectionString("StoreDB"), sqlOptions => sqlOptions.MigrationsAssembly(assembly)
+                    configuration.GetConnectionString("StoreDB"), sqlOptions => 
+                    {
+                        sqlOptions.MigrationsAssembly(assembly);
+                        sqlOptions.MigrationsHistoryTable("LogMigracionesEF");             
+                    }                  
                 );
             }, ServiceLifetime.Scoped);
 
