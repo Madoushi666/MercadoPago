@@ -32,6 +32,11 @@ namespace MercadoPago.CheckoutAPI.Infrastructure.Persistences.Contexts.Configura
                 .HasForeignKey(d => d.IdRol)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Usuarios_Roles");
+
+            builder.HasData(
+                new Usuario() { Id = 1, Email = "test@admin.com.ar", Username = "Admin", Password = "$argon2id$v=19$m=65536,t=3,p=1$wJzWQr1EhYRpANrf4CN46g$r769BfweDJBt6GW/l2/9+Tf+glooEXl4WWAf18u+1C8", IdRol = 1, FechaCreacion = new DateTime(2025, 03, 01, 18, 35, 22) }, // Password: 1234
+                new Usuario() { Id = 2, Email = "test@customer.com.ar", Username = "Customer", Password = "$argon2id$v=19$m=65536,t=3,p=1$dx/JCx8reoHCnDyv7N30dg$qK//vGto1eBnUUmjwoVOKmVNxNO2rHwIRvIun4eWAxc", IdRol = 3, FechaCreacion = new DateTime(2025, 03, 01, 19, 49, 44) } // Password: 4321
+            );
         }
     }
 }

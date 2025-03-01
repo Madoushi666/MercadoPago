@@ -17,6 +17,12 @@ namespace MercadoPago.CheckoutAPI.Infrastructure.Persistences.Contexts.Configura
                 .IsUnicode(false);
             builder.Property(e => e.FechaActualizacion).HasColumnType("datetime");
             builder.Property(e => e.FechaCreacion).HasColumnType("datetime");
+
+            builder.HasData(
+                new Role() { Id = 1, Descripcion = "administrator", FechaCreacion = new DateTime(2025, 03, 01, 15, 30, 12) },
+                new Role() { Id = 2, Descripcion = "supervisor", FechaCreacion = new DateTime(2025, 03, 01, 16, 40, 24) },
+                new Role() { Id = 3, Descripcion = "customer", FechaCreacion = new DateTime(2025, 03, 01, 17, 50, 36) }
+            );
         }
     }
 }
